@@ -1,0 +1,20 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 1024px;
+  min-height: 780px;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; cursor: pointer; }
+
+ul { list-style: none; padding: 0; margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+img, svg { display: block; max-width: 100%; }

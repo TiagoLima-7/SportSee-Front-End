@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 28px;
+    padding-right: 91px;
+    height: 91px;
+    background-color: var(--bg-nav);
+    color: var(--bg-text);
+    position: fixed;
+    width: 100vw;
+
+    .header-list {
+        display: flex;
+        gap: 219px;
+
+        li {
+            font-size: 24px;
+        }
+    }
+}
