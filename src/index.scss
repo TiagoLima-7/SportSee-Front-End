@@ -1,22 +1,23 @@
-@use './style/main.scss';
+@use "./style/main.scss";
 
 :root {
   --text: #000;
-  --text-h: #20253A;
-  --bg: #E5E5E5;
+  --text-h: #20253a;
+  --bg: #e5e5e5;
   --bg-nav: #000;
-  --bg-text: #FFF;
-  --main-graph-red:#E60000;
-  --red-graph-bg: #FF0000;
-  --grey-graph-bg: #282D30;
+  --bg-text: #fff;
+  --main-graph-bg: #fbfbfb;
+  --main-graph-red: #e60000;
+  --red-graph-bg: #ff0000;
+  --grey-graph-bg: #282d30;
   --red-bg: rgba(255, 0, 0, 0.0661);
   --blue-bg: rgba(74, 184, 255, 0.1);
   --yellow-bg: rgba(249, 206, 35, 0.1017);
   --pink-bg: rgba(253, 81, 129, 0.1);
-  --shadow:
-    rgba(0, 0, 0, 0.25) 0 4px 4px 0px;
+  --shadow: rgba(0, 0, 0, 0.25) 0 4px 4px 0;
 }
 
-html, body {
+html,
+body {
   font-family: "Roboto", sans-serif;
 }

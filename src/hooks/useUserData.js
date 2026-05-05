@@ -1,5 +1,5 @@
 /**
- * useUserData — hook qui charge les 4 datasets d'un utilisateur en parallèle.
+ * useUserData - hook qui charge les 4 datasets d'un utilisateur en parallèle.
  *
  * Usage :
  *   const { user, activity, sessions, performance, loading, error } = useUserData(12);
@@ -12,30 +12,32 @@
  *   les composants n'aient plus à se poser la question.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   getUserMainData,
   getUserActivity,
   getUserAverageSessions,
   getUserPerformance,
-} from '../services/mockApi';
+} from "../services/mockApi";
 
-const useUserData = (userId) => {
-  const [data, setData] = useState({
+const initialState = {
+  fetchedFor: null,
+  data: {
     user: null,
     activity: null,
     sessions: null,
     performance: null,
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  },
+  error: null,
+};
+
+const useUserData = (userId) => {
+  const [state, setState] = useState(initialState);
 
   useEffect(() => {
-    if (userId === undefined || userId === null) return;
+    if (userId == null) return;
 
     let ignore = false;
-    setLoading(true);
-    setError(null);
 
     Promise.all([
       getUserMainData(userId),
@@ -45,26 +47,26 @@ const useUserData = (userId) => {
     ])
       .then(([mainRes, activityRes, sessionsRes, perfRes]) => {
         if (ignore) return;
-
         const main = mainRes.data;
-        // Normalisation de la quirk back : user 12 → todayScore, user 18 → score
-        const normalizedUser = {
-          ...main,
-          score: main.todayScore ?? main.score ?? 0,
-        };
-
-        setData({
-          user: normalizedUser,
-          activity: activityRes.data,
-          sessions: sessionsRes.data,
-          performance: perfRes.data,
+        setState({
+          fetchedFor: userId,
+          data: {
+            // Normalisation de la quirk back : user 12 → todayScore, user 18 → score
+            user: { ...main, score: main.todayScore ?? main.score ?? 0 },
+            activity: activityRes.data,
+            sessions: sessionsRes.data,
+            performance: perfRes.data,
+          },
+          error: null,
         });
-        setLoading(false);
       })
       .catch((err) => {
         if (ignore) return;
-        setError(err);
-        setLoading(false);
+        setState({
+          fetchedFor: userId,
+          data: initialState.data,
+          error: err,
+        });
       });
 
     return () => {
@@ -72,7 +74,15 @@ const useUserData = (userId) => {
     };
   }, [userId]);
 
-  return { ...data, loading, error };
+  // États dérivés — pas de useState, pas d'effet, juste du calcul à chaque render.
+  const loading = userId != null && state.fetchedFor !== userId;
+  const error = state.fetchedFor === userId ? state.error : null;
+
+  return {
+    ...state.data,
+    loading,
+    error,
+  };
 };
 
 export default useUserData;

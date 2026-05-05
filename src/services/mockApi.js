@@ -1,5 +1,5 @@
 /**
- * Mock API SportSee — mime l'interface du vrai back-end.
+ * Mock API SportSee - mime l'interface du vrai back-end.
  *
  * Chaque fonction :
  *   - retourne une Promise (comme fetch) → vos composants peuvent utiliser
@@ -10,7 +10,7 @@
  *     pour que vous puissiez tester vos branches d'erreur.
  *
  * Pour basculer vers le vrai back-end plus tard, il suffira de réécrire ces
- * 4 fonctions avec `fetch('http://localhost:3000/user/...')` — la signature
+ * 4 fonctions avec `fetch('http://localhost:3000/user/...')` - la signature
  * reste identique, donc aucun composant à modifier.
  */
 
@@ -19,7 +19,7 @@ import {
   USER_ACTIVITY,
   USER_AVERAGE_SESSIONS,
   USER_PERFORMANCE,
-} from '../data/mockData';
+} from "../data/mockData";
 
 const FAKE_LATENCY_MS = 200;
 
@@ -31,7 +31,9 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const findOrThrow = (collection, predicate, label, userId) => {
   const item = collection.find(predicate);
   if (!item) {
-    throw new Error(`[mockApi] ${label} introuvable pour l'utilisateur ${userId}`);
+    throw new Error(
+      `[mockApi] ${label} introuvable pour l'utilisateur ${userId}`,
+    );
   }
   return item;
 };
@@ -46,7 +48,7 @@ export const getUserMainData = async (userId) => {
   const data = findOrThrow(
     USER_MAIN_DATA,
     (u) => u.id === Number(userId),
-    'USER_MAIN_DATA',
+    "USER_MAIN_DATA",
     userId,
   );
   return { data };
@@ -62,7 +64,7 @@ export const getUserActivity = async (userId) => {
   const data = findOrThrow(
     USER_ACTIVITY,
     (u) => u.userId === Number(userId),
-    'USER_ACTIVITY',
+    "USER_ACTIVITY",
     userId,
   );
   return { data };
@@ -78,7 +80,7 @@ export const getUserAverageSessions = async (userId) => {
   const data = findOrThrow(
     USER_AVERAGE_SESSIONS,
     (u) => u.userId === Number(userId),
-    'USER_AVERAGE_SESSIONS',
+    "USER_AVERAGE_SESSIONS",
     userId,
   );
   return { data };
@@ -94,7 +96,7 @@ export const getUserPerformance = async (userId) => {
   const data = findOrThrow(
     USER_PERFORMANCE,
     (u) => u.userId === Number(userId),
-    'USER_PERFORMANCE',
+    "USER_PERFORMANCE",
     userId,
   );
   return { data };

@@ -1,0 +1,33 @@
+/**
+ * Styles du chart "Activité quotidienne".
+ * À importer depuis ton index.scss principal (ou via @use selon ta config).
+ *
+ * La figure a une taille fixe de 835x320 - qui matche pile le viewBox du SVG,
+ * donc aucune distortion. Les marges internes (titre, axes, etc.) sont gérées
+ * dans le composant via les constantes `margin`.
+ */
+
+.activity-chart {
+  width: 835px;
+  height: 320px;
+  background-color: var(--main-graph-bg);
+  border-radius: 5px;
+  margin: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &-title {
+    font-size: 15px;
+    font-weight: 500;
+    fill: #20253a;
+  }
+
+  &-legend {
+    font-size: 14px;
+    fill: #74798c;
+  }
+}

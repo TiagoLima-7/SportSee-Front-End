@@ -1,4 +1,6 @@
-@use 'base/reset';
-@use 'layout/header';
-@use 'layout/sidebar';
-@use 'layout/content'
+@use "base/reset";
+@use "layout/header";
+@use "layout/sidebar";
+@use "layout/content";
+
+@use "components/charts/activityChart";
