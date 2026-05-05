@@ -74,7 +74,7 @@ const useUserData = (userId) => {
     };
   }, [userId]);
 
-  // États dérivés — pas de useState, pas d'effet, juste du calcul à chaque render.
+  // États dérivés - pas de useState, pas d'effet, juste du calcul à chaque render.
   const loading = userId != null && state.fetchedFor !== userId;
   const error = state.fetchedFor === userId ? state.error : null;
 

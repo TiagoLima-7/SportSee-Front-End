@@ -1,7 +1,15 @@
 import useUserData from "../hooks/useUserData.js";
 import { useParams } from "react-router-dom";
+
 import ActivityModel from "../models/ActivityModel.js";
+import AverageSessionModel from "../models/AverageSessionModel.js";
+import ScoreModel from "../models/ScoreModel.js";
+
 import ActivityChart from "../components/charts/ActivityChart.jsx";
+import AverageSessionChart from "../components/charts/AverageSessionChart.jsx";
+import PerformanceModel from "../models/PerformanceModel.js";
+import PerformanceChart from "../components/charts/PerformanceChart.jsx";
+import ScoreChart from "../components/charts/ScoreChart.jsx";
 
 const Home = () => {
   // const [userId] = useState(18);
@@ -21,16 +29,30 @@ const Home = () => {
   if (error) return <p>Utilisateur introuvable : {error.message}</p>;
 
   const activityModel = new ActivityModel(activity);
+  const avarageSessionLengthModel = new AverageSessionModel(sessions);
+  const performanceModel = new PerformanceModel(performance);
+  const scoreModel = new ScoreModel(user);
 
   return (
-    <>
-      <h1>Bonjour {user.userInfos.firstName}</h1>
-      <p>Felicitations ! Vous avez explosé vos objectifs hier 👏</p>
-      <p>Score : {Math.round(user.score * 100)}%</p>
-      <ActivityChart model={activityModel} />
-      //Débug temporaire
-      <pre>{JSON.stringify({ activity, sessions, performance }, null, 2)}</pre>
-    </>
+    <div className="data-container">
+      <div className="text-container">
+        <h1>
+          Bonjour <span className="user-name">{user.userInfos.firstName}</span>
+        </h1>
+        <p>Felicitations ! Vous avez explosé vos objectifs hier 👏</p>
+      </div>
+      <div className="graphs-container">
+        <div className="main-graphs-container">
+          <ActivityChart model={activityModel} />
+          <div className="small-graphs-container">
+            <AverageSessionChart model={avarageSessionLengthModel} />
+            <PerformanceChart model={performanceModel} />
+            <ScoreChart model={scoreModel} />
+          </div>
+        </div>
+        <div className="recap-container"></div>
+      </div>
+    </div>
   );
 };
 

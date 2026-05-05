@@ -2,3 +2,49 @@
   padding-left: 224px;
   padding-top: 159px;
 }
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 41px;
+
+    h1 {
+      font-size: 48px;
+    }
+
+    .user-name {
+      color: var(--text-red);
+    }
+
+    p {
+      font-size: 18px;
+    }
+  }
+
+  .graphs-container {
+    display: flex;
+    flex-direction: row;
+    gap: 31px;
+    align-items: stretch;
+
+    .main-graphs-container {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+
+      .small-graphs-container {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+      }
+    }
+
+    .recap-container {
+      width: 258px;
+    }
+  }
+}

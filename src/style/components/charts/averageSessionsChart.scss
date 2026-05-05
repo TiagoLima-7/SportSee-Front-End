@@ -1,0 +1,33 @@
+/**
+ * Styles du chart "Durée moyenne des sessions".
+ *
+ * 258x263 fixe (taille demandée), fond rouge SportSee, coins arrondis.
+ * Le SVG est transparent - c'est la figure qui porte la couleur de fond,
+ * comme ça le border-radius est appliqué sur le bon élément.
+ */
+
+.average-sessions-chart {
+  width: 258px;
+  height: 263px;
+  background-color: #ff0000;
+  border-radius: 5px;
+  margin: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &-title {
+    font-size: 15px;
+    font-weight: 500;
+    fill: rgba(255, 255, 255, 0.5);
+  }
+
+  &-day {
+    font-size: 12px;
+    font-weight: 500;
+    fill: rgba(255, 255, 255, 0.5);
+  }
+}

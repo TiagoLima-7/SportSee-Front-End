@@ -1,0 +1,38 @@
+/**
+ * Styles du chart "Score".
+ *
+ * Fond gris clair (comme le chart Activity), titre en haut à gauche,
+ * gros pourcentage en gras au centre, caption "de votre objectif" en
+ * gris plus clair en dessous.
+ */
+
+.score-chart {
+  width: 258px;
+  height: 263px;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  margin: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &-title {
+    font-size: 15px;
+    font-weight: 500;
+    fill: #20253a;
+  }
+
+  &-percentage {
+    font-size: 26px;
+    font-weight: 700;
+    fill: #282d30;
+  }
+
+  &-caption {
+    font-size: 16px;
+    fill: #74798c;
+  }
+}
