@@ -1,0 +1,65 @@
+/**
+ * Styles de la carte KeyDataCard.
+ *
+ * Layout horizontal : icône à gauche, texte à droite, alignés verticalement.
+ * Dimensions par défaut : 258x124, mais le composant s'adapte si tu lui
+ * donnes un parent avec largeur différente (flex/grid).
+ */
+
+.key-data-card {
+  width: 100%;
+  aspect-ratio: 258 / 124;
+  display: flex;
+  align-items: center;
+  background-color: var(--main-graph-bg);
+  border-radius: 5px;
+  margin: 0;
+  max-width: 258px;
+
+  // ---- Le réglage qui rend tout l'intérieur fluide ----
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+
+  // Tout en em ↓ — proportionnel à la font-size ci-dessus
+  padding: 0 2em; // équivaut à 32px à font-size=16px
+  gap: 1.5em; // équivaut à 24px
+
+  &-icon-wrapper {
+    width: 3.75em; // équivaut à 60px
+    height: 3.75em;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &-icon {
+    width: 1.5em; // équivaut à 24px
+    height: 1.5em;
+    object-fit: contain;
+  }
+
+  &-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0; // évite les débordements en flex
+  }
+
+  &-value {
+    font-size: 1.25em; // équivaut à 20px
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &-label {
+    font-size: 0.875em; // équivaut à 14px
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.2;
+  }
+}

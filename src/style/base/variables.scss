@@ -1,0 +1,31 @@
+:root {
+  //---Couleurs de texte---
+  --text: #000;
+  --text-h: #20253a;
+  --text-red: #ff0101;
+  --text-secondary: #74798c;
+  --text-dark: #282d30;
+
+  //---Backgrounds---
+  --bg: #e5e5e5;
+  --bg-nav: #000000;
+  --bg-text: #ffffff;
+  --main-graph-bg: #fbfbfb;
+  --main-graph-hover-bg: #c4c4c4;
+  --grey-graph-bg: #282d30;
+  --red-graph-bg: #ff0000;
+  --main-graph-red: #e60000;
+
+  //---Tints des icones nutrition---
+  --red-bg: rgba(255, 0, 0, 0.0661);
+  --blue-bg: rgba(74, 184, 255, 0.1);
+  --yellow-bg: rgba(249, 206, 35, 0.1017);
+  --pink-bg: rgba(253, 81, 129, 0.1);
+
+  //---Divers---
+  --shadow: rgba(0, 0, 0, 0.25) 0 4px 4px 0;
+
+  //---Layout fixe (header et sidebar en position fixed)---
+  --header-height: 91px;
+  --sidebar-width: 117px;
+}

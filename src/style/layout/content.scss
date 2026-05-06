@@ -1,6 +1,10 @@
 .content {
-  padding-left: 224px;
-  padding-top: 159px;
+  // Padding-left : la sidebar (117px) + une marge confortable.
+  // Le calc() factorise le fait que si on changeait --sidebar-width
+  // demain, le padding suit automatiquement.
+  padding-left: calc(var(--sidebar-width) + 107px);
+  padding-top: calc(var(--header-height) + 68px);
+  padding-right: 90px;
 }
 
 .data-container {
@@ -30,21 +34,34 @@
     flex-direction: row;
     gap: 31px;
     align-items: stretch;
+    margin-top: 77px;
 
     .main-graphs-container {
+      // Ratio d'origine : 835 unités de largeur sur la maquette.
+      flex: 835 1 0;
       display: flex;
       flex-direction: column;
       gap: 28px;
+      max-width: 835px;
 
       .small-graphs-container {
         display: flex;
         flex-direction: row;
         gap: 30px;
+
+        // Les 3 charts se partagent à parts égales l'espace dispo.
+        > * {
+          flex: 1 1 0;
+        }
       }
     }
 
     .recap-container {
-      width: 258px;
+      // Ratio d'origine : 258 unités de largeur sur la maquette.
+      flex: 258 1 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
   }
 }

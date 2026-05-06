@@ -7,8 +7,8 @@
  */
 
 .performance-chart {
-  width: 258px;
-  height: 263px;
+  width: 100%;
+  aspect-ratio: 258 / 263;
   background-color: var(--grey-graph-bg);
   border-radius: 5px;
   margin: 0;

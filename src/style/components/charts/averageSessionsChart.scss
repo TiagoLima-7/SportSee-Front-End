@@ -7,9 +7,9 @@
  */
 
 .average-sessions-chart {
-  width: 258px;
-  height: 263px;
-  background-color: #ff0000;
+  width: 100%;
+  aspect-ratio: 258 / 263;
+  background-color: var(--red-graph-bg);
   border-radius: 5px;
   margin: 0;
 
@@ -30,4 +30,10 @@
     font-weight: 500;
     fill: rgba(255, 255, 255, 0.5);
   }
+}
+
+.average-sessions-tooltip {
+  font-size: 10px;
+  font-weight: 500;
+  fill: #000000;
 }

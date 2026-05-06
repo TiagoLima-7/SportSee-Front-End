@@ -8,8 +8,8 @@
  */
 
 .activity-chart {
-  width: 835px;
-  height: 320px;
+  width: 100%;
+  aspect-ratio: 835 / 320;
   background-color: var(--main-graph-bg);
   border-radius: 5px;
   margin: 0;
@@ -23,11 +23,18 @@
   &-title {
     font-size: 15px;
     font-weight: 500;
-    fill: #20253a;
+    fill: var(--text-h);
   }
 
   &-legend {
     font-size: 14px;
-    fill: #74798c;
+    fill: var(--text-secondary);
+  }
+
+  // Texte à l'intérieur de la tooltip rouge (poids + calories au survol).
+  &-tooltip-text {
+    font-size: 8px;
+    font-weight: 500;
+    fill: #ffffff;
   }
 }

@@ -3,13 +3,51 @@ import { useParams } from "react-router-dom";
 
 import ActivityModel from "../models/ActivityModel.js";
 import AverageSessionModel from "../models/AverageSessionModel.js";
+import PerformanceModel from "../models/PerformanceModel.js";
 import ScoreModel from "../models/ScoreModel.js";
 
 import ActivityChart from "../components/charts/ActivityChart.jsx";
 import AverageSessionChart from "../components/charts/AverageSessionChart.jsx";
-import PerformanceModel from "../models/PerformanceModel.js";
 import PerformanceChart from "../components/charts/PerformanceChart.jsx";
 import ScoreChart from "../components/charts/ScoreChart.jsx";
+
+import KeyDataCard from "../components/cards/KeyDataCard.jsx";
+
+import caloriesIcon from "../assets/icons/energy.svg";
+import proteinsIcon from "../assets/icons/chicken.svg";
+import carbIcon from "../assets/icons/apple.svg";
+import lipidIcon from "../assets/icons/cheeseburger.svg";
+
+const KEY_DATA_CONFIG = [
+  {
+    icon: caloriesIcon,
+    iconColor: "var(--red-bg)",
+    unit: "kCal",
+    label: "Calories",
+    dataKey: "calorieCount",
+  },
+  {
+    icon: proteinsIcon,
+    iconColor: "rgba(74, 184, 255, 0.07)",
+    unit: "g",
+    label: "Protéines",
+    dataKey: "proteinCount",
+  },
+  {
+    icon: carbIcon,
+    iconColor: "rgba(249, 206, 35, 0.07)",
+    unit: "g",
+    label: "Glucides",
+    dataKey: "carbohydrateCount",
+  },
+  {
+    icon: lipidIcon,
+    iconColor: "rgba(253, 81, 129, 0.07)",
+    unit: "g",
+    label: "Lipides",
+    dataKey: "lipidCount",
+  },
+];
 
 const Home = () => {
   // const [userId] = useState(18);
@@ -50,7 +88,18 @@ const Home = () => {
             <ScoreChart model={scoreModel} />
           </div>
         </div>
-        <div className="recap-container"></div>
+        <div className="recap-container">
+          {KEY_DATA_CONFIG.map((cfg) => (
+            <KeyDataCard
+              key={cfg.label}
+              icon={cfg.icon}
+              iconColor={cfg.iconColor}
+              value={user.keyData[cfg.dataKey]}
+              unit={cfg.unit}
+              label={cfg.label}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

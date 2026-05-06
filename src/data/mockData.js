@@ -11,7 +11,7 @@
  * la gérer dans la couche d'adaptation (model/service), comme avec le vrai back.
  */
 
-// ─── USER_MAIN_DATA ──────────────────────────────────────────────
+// --- USER_MAIN_DATA ----------------------------------------------
 export const USER_MAIN_DATA = [
   {
     id: 12,
@@ -45,11 +45,14 @@ export const USER_MAIN_DATA = [
   },
 ];
 
-// ─── USER_ACTIVITY ───────────────────────────────────────────────
+// --- USER_ACTIVITY -----------------------------------------------
 export const USER_ACTIVITY = [
   {
     userId: 12,
     sessions: [
+      { day: "2020-07-01", kilogram: 80, calories: 240 },
+      { day: "2020-07-02", kilogram: 80, calories: 220 },
+      { day: "2020-07-03", kilogram: 81, calories: 280 },
       { day: "2020-07-01", kilogram: 80, calories: 240 },
       { day: "2020-07-02", kilogram: 80, calories: 220 },
       { day: "2020-07-03", kilogram: 81, calories: 280 },
@@ -73,7 +76,7 @@ export const USER_ACTIVITY = [
   },
 ];
 
-// ─── USER_AVERAGE_SESSIONS ───────────────────────────────────────
+// --- USER_AVERAGE_SESSIONS ---------------------------------------
 // `day` est codé 1-7 (Lundi → Dimanche) côté back.
 export const USER_AVERAGE_SESSIONS = [
   {
@@ -102,7 +105,7 @@ export const USER_AVERAGE_SESSIONS = [
   },
 ];
 
-// ─── USER_PERFORMANCE ────────────────────────────────────────────
+// --- USER_PERFORMANCE --------------------------------------------
 // `kind` est un mapping numérique → libellé. Attention : les libellés sont en
 // anglais et l'ordre des `data` n'est pas l'ordre d'affichage du radar chart.
 const PERFORMANCE_KIND = {
