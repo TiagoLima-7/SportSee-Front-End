@@ -1,30 +1,42 @@
 /**
- * Styles de la carte KeyDataCard.
+ * KeyDataCard — internes 100% fluides via container queries.
  *
- * Layout horizontal : icône à gauche, texte à droite, alignés verticalement.
- * Dimensions par défaut : 258x124, mais le composant s'adapte si tu lui
- * donnes un parent avec largeur différente (flex/grid).
+ * Le principe :
+ *   - Le card lui-même devient un "container query container" via
+ *     container-type: inline-size.
+ *   - À l'intérieur, l'unité `cqi` (container query inline-size) vaut 1%
+ *     de la largeur du card. Donc 6cqi = 6% de la largeur du card.
+ *   - La font-size de référence est calculée en cqi, bornée par clamp().
+ *     Tout le reste (padding, gap, icône, valeurs) est en `em` →
+ *     proportionnel à cette font-size de référence.
+ *
+ * Bénéfice : peu importe la taille du viewport, la font et les internes
+ * scalent avec la LARGEUR RÉELLE du card. Plus de "trop grand quand le
+ * card est petit" à cause d'un viewport encore large.
+ *
+ * Comparé à clamp(0.75rem, 1.4vw, 1rem) :
+ *   - À card_width=258 : 6cqi = 15.5px (clampé à 1rem = 16)
+ *   - À card_width=234 : 6cqi = 14px (au lieu de 16 avec viewport-based)
+ *   - À card_width=200 : 6cqi = 12px (au lieu de 16)
+ *   - À card_width=160 : 6cqi = 9.6px → clampé à 0.65rem
  */
 
 .key-data-card {
   width: 100%;
   aspect-ratio: 258 / 124;
+  max-width: 258px;
   display: flex;
   align-items: center;
   background-color: var(--main-graph-bg);
   border-radius: 5px;
   margin: 0;
-  max-width: 258px;
 
-  // ---- Le réglage qui rend tout l'intérieur fluide ----
-  font-size: clamp(0.75rem, 1.4vw, 1rem);
-
-  // Tout en em ↓ — proportionnel à la font-size ci-dessus
-  padding: 0 2em; // équivaut à 32px à font-size=16px
-  gap: 1.5em; // équivaut à 24px
+  // ──── Tout le reste en em : suit automatiquement la font-size ────
+  padding: 0 2em; // 32px à font-size=16px, 24px à font-size=12px, etc.
+  gap: 1.5em;
 
   &-icon-wrapper {
-    width: 3.75em; // équivaut à 60px
+    width: 3.75em;
     height: 3.75em;
     aspect-ratio: 1;
     border-radius: 6px;
@@ -35,7 +47,7 @@
   }
 
   &-icon {
-    width: 1.5em; // équivaut à 24px
+    width: 1.5em;
     height: 1.5em;
     object-fit: contain;
   }
@@ -48,7 +60,7 @@
   }
 
   &-value {
-    font-size: 1.25em; // équivaut à 20px
+    font-size: 20px; // 20px à font-size=16px
     font-weight: 700;
     color: var(--text-dark);
     margin: 0;
@@ -56,10 +68,28 @@
   }
 
   &-label {
-    font-size: 0.875em; // équivaut à 14px
+    font-size: 14px; // 14px à font-size=16px
     font-weight: 500;
     color: var(--text-secondary);
     margin: 0;
     line-height: 1.2;
+  }
+
+  @media screen and (max-width: 1440px) {
+    padding: 1em;
+    gap: 1em;
+
+    &-icon-wrapper {
+      width: 2.75em;
+      height: 2.75em;
+    }
+
+    &-value {
+      font-size: 16px;
+    }
+
+    &-label {
+      font-size: 12px;
+    }
   }
 }
