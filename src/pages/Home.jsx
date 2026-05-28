@@ -21,7 +21,7 @@ import lipidIcon from "../assets/icons/cheeseburger.svg";
 const KEY_DATA_CONFIG = [
   {
     icon: caloriesIcon,
-    iconColor: "var(--red-bg)",
+    iconColor: "rgba(255, 0, 0, 0.0661)",
     unit: "kCal",
     label: "Calories",
     dataKey: "calorieCount",

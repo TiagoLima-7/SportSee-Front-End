@@ -7,10 +7,12 @@
  * dans le composant via les constantes `margin`.
  */
 
+@use "../../base/variables" as *;
+
 .activity-chart {
   width: 100%;
   aspect-ratio: 835 / 320;
-  background-color: var(--main-graph-bg);
+  background-color: $main-graph-bg;
   border-radius: 5px;
   margin: 0;
 
@@ -23,12 +25,12 @@
   &-title {
     font-size: 15px;
     font-weight: 500;
-    fill: var(--text-h);
+    fill: $text-h;
   }
 
   &-legend {
     font-size: 14px;
-    fill: var(--text-secondary);
+    fill: $text-secondary;
   }
 
   // Texte à l'intérieur de la tooltip rouge (poids + calories au survol).

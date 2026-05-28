@@ -1,50 +1,50 @@
+@use "../base/variables" as *;
+
 .sidebar {
-    width: 117px;
-    background-color: var(--bg-nav);
-    height: 100vh;
-    position: fixed;
-    top: 91px;
-    left: 0;
-    height: calc(100vh - 91px);
+  width: $sidebar-width;
+  background-color: $bg-nav;
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  height: calc(100vh - #{$header-height});
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .sidebar-list {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    gap: 20px;
 
-    .sidebar-list {
+    .sidebar-link {
+      height: 64px;
+      width: 64px;
+
+      button {
+        width: 100%;
+        height: 100%;
         display: flex;
-        flex: 1;
-        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        gap: 20px;
+        margin: 0;
+        padding: 0;
 
-        .sidebar-link {
-            height: 64px;
-            width: 64px;
-        
-            button {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0;
-                padding: 0;
-
-                img {
-                    max-width: 32px;
-                }
-            }
-        
+        img {
+          max-width: 32px;
         }
+      }
     }
+  }
 
-    .sidebar_copy {
-        margin-top: auto;
-        margin-bottom: 59px;
-        writing-mode:sideways-lr;
-        color: var(--bg-text);
-        justify-self: flex-end;
-        font-size: 12px
-    }
+  .sidebar_copy {
+    margin-top: auto;
+    margin-bottom: 59px;
+    writing-mode: sideways-lr;
+    color: $bg-text;
+    justify-self: flex-end;
+    font-size: 12px;
+  }
 }

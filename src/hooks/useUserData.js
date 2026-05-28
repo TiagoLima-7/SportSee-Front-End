@@ -1,3 +1,92 @@
+// /**
+//  * useUserData - hook qui charge les 4 datasets d'un utilisateur en parallèle.
+//  *
+//  * Usage :
+//  *   const { user, activity, sessions, performance, loading, error } = useUserData(12);
+//  *
+//  * - Les 4 appels partent en parallèle via Promise.all (pas en cascade).
+//  * - Le hook gère le re-fetch automatique quand `userId` change.
+//  * - Le flag `ignore` évite les "race conditions" si l'utilisateur change
+//  *   rapidement d'ID (ou en mode StrictMode où l'effet est exécuté deux fois).
+//  * - On normalise ici la quirk `todayScore` / `score` du back-end pour que
+//  *   les composants n'aient plus à se poser la question.
+//  */
+
+// import { useEffect, useState } from "react";
+// import {
+//   getUserMainData,
+//   getUserActivity,
+//   getUserAverageSessions,
+//   getUserPerformance,
+// } from "../services/mockApi";
+
+// const initialState = {
+//   fetchedFor: null,
+//   data: {
+//     user: null,
+//     activity: null,
+//     sessions: null,
+//     performance: null,
+//   },
+//   error: null,
+// };
+
+// const useUserData = (userId) => {
+//   const [state, setState] = useState(initialState);
+
+//   useEffect(() => {
+//     if (userId == null) return;
+
+//     let ignore = false;
+
+//     Promise.all([
+//       getUserMainData(userId),
+//       getUserActivity(userId),
+//       getUserAverageSessions(userId),
+//       getUserPerformance(userId),
+//     ])
+//       .then(([mainRes, activityRes, sessionsRes, perfRes]) => {
+//         if (ignore) return;
+//         const main = mainRes.data;
+//         setState({
+//           fetchedFor: userId,
+//           data: {
+//             // Normalisation de la quirk back : user 12 → todayScore, user 18 → score
+//             user: { ...main, score: main.todayScore ?? main.score ?? 0 },
+//             activity: activityRes.data,
+//             sessions: sessionsRes.data,
+//             performance: perfRes.data,
+//           },
+//           error: null,
+//         });
+//       })
+//       .catch((err) => {
+//         if (ignore) return;
+//         setState({
+//           fetchedFor: userId,
+//           data: initialState.data,
+//           error: err,
+//         });
+//       });
+
+//     return () => {
+//       ignore = true;
+//     };
+//   }, [userId]);
+
+//   // États dérivés - pas de useState, pas d'effet, juste du calcul à chaque render.
+//   const loading = userId != null && state.fetchedFor !== userId;
+//   const error = state.fetchedFor === userId ? state.error : null;
+
+//   return {
+//     ...state.data,
+//     loading,
+//     error,
+//   };
+// };
+
+// export default useUserData;
+
 /**
  * useUserData - hook qui charge les 4 datasets d'un utilisateur en parallèle.
  *
@@ -5,23 +94,27 @@
  *   const { user, activity, sessions, performance, loading, error } = useUserData(12);
  *
  * - Les 4 appels partent en parallèle via Promise.all (pas en cascade).
- * - Le hook gère le re-fetch automatique quand `userId` change.
+ * - La source (mock ou vraie API) est lue depuis le store de api.js via
+ *   useApiSource(). Le hook refait les 4 fetches si `userId` change OU si
+ *   l'utilisateur bascule la source dans le Header.
  * - Le flag `ignore` évite les "race conditions" si l'utilisateur change
- *   rapidement d'ID (ou en mode StrictMode où l'effet est exécuté deux fois).
+ *   rapidement d'ID ou toggle plusieurs fois d'affilée.
  * - On normalise ici la quirk `todayScore` / `score` du back-end pour que
  *   les composants n'aient plus à se poser la question.
  */
 
 import { useEffect, useState } from "react";
+
 import {
   getUserMainData,
   getUserActivity,
   getUserAverageSessions,
   getUserPerformance,
+  useApiSource,
 } from "../services/mockApi";
 
 const initialState = {
-  fetchedFor: null,
+  fetchedKey: null, // `${userId}:${source}`
   data: {
     user: null,
     activity: null,
@@ -32,7 +125,13 @@ const initialState = {
 };
 
 const useUserData = (userId) => {
+  const { source } = useApiSource();
+
   const [state, setState] = useState(initialState);
+
+  // Clé composée : on considère la donnée "fraîche" uniquement si elle a été
+  // fetchée pour le bon user ET avec la bonne source.
+  const fetchKey = userId != null ? `${userId}:${source}` : null;
 
   useEffect(() => {
     if (userId == null) return;
@@ -49,7 +148,7 @@ const useUserData = (userId) => {
         if (ignore) return;
         const main = mainRes.data;
         setState({
-          fetchedFor: userId,
+          fetchedKey: `${userId}:${source}`,
           data: {
             // Normalisation de la quirk back : user 12 → todayScore, user 18 → score
             user: { ...main, score: main.todayScore ?? main.score ?? 0 },
@@ -63,7 +162,7 @@ const useUserData = (userId) => {
       .catch((err) => {
         if (ignore) return;
         setState({
-          fetchedFor: userId,
+          fetchedKey: `${userId}:${source}`,
           data: initialState.data,
           error: err,
         });
@@ -72,11 +171,11 @@ const useUserData = (userId) => {
     return () => {
       ignore = true;
     };
-  }, [userId]);
+  }, [userId, source]);
 
   // États dérivés - pas de useState, pas d'effet, juste du calcul à chaque render.
-  const loading = userId != null && state.fetchedFor !== userId;
-  const error = state.fetchedFor === userId ? state.error : null;
+  const loading = fetchKey != null && state.fetchedKey !== fetchKey;
+  const error = state.fetchedKey === fetchKey ? state.error : null;
 
   return {
     ...state.data,

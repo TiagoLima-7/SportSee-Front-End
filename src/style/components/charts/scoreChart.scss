@@ -6,10 +6,12 @@
  * gris plus clair en dessous.
  */
 
+@use "../../base/variables" as *;
+
 .score-chart {
   width: 100%;
   aspect-ratio: 258 / 263;
-  background-color: var(--main-graph-bg);
+  background-color: $main-graph-bg;
   border-radius: 5px;
   margin: 0;
 
@@ -22,17 +24,17 @@
   &-title {
     font-size: 15px;
     font-weight: 500;
-    fill: var(--text-h);
+    fill: $text-h;
   }
 
   &-percentage {
     font-size: 26px;
     font-weight: 700;
-    fill: var(--text-dark);
+    fill: $text-dark;
   }
 
   &-caption {
     font-size: 16px;
-    fill: var(--text-secondary);
+    fill: $text-secondary;
   }
 }

@@ -1,9 +1,10 @@
+@use "../base/variables" as *;
+
 .content {
-  // Padding-left : la sidebar (117px) + une marge confortable.
-  // Le calc() factorise le fait que si on changeait --sidebar-width
-  // demain, le padding suit automatiquement.
-  padding-left: calc(var(--sidebar-width) + 107px);
-  padding-top: calc(var(--header-height) + 68px);
+  // Padding-left : la sidebar + une marge confortable.
+  // calc() permet de suivre automatiquement si $sidebar-width change.
+  padding-left: calc(#{$sidebar-width} + 107px);
+  padding-top: calc(#{$header-height} + 68px);
   padding-right: 90px;
 }
 
@@ -21,7 +22,7 @@
     }
 
     .user-name {
-      color: var(--text-red);
+      color: $text-red;
     }
 
     p {

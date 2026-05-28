@@ -1,21 +1,159 @@
+@use "../base/variables" as *;
+
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 28px;
+  padding-right: 91px;
+  height: $header-height;
+  background-color: $bg-nav;
+  color: $bg-text;
+  position: fixed;
+  width: 100vw;
+
+  .header-list {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 28px;
-    padding-right: 91px;
-    height: 91px;
-    background-color: var(--bg-nav);
-    color: var(--bg-text);
-    position: fixed;
-    width: 100vw;
-
-    .header-list {
-        display: flex;
-        gap: 219px;
-
-        li {
-            font-size: 24px;
-        }
+    gap: 219px;
+    transition: all 0.3s;
+    li {
+      font-size: 24px;
     }
+  }
+
+  // Le bouton "Accueil" (interrupteur Mock/API) ressemble visuellement aux
+  // autres NavLinks : on neutralise les styles browser par défaut du <button>.
+  .header-link-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  // Badge indiquant la source courante. Tailles & couleurs pensées pour
+  // rester lisibles sur le header noir, sans casser la baseline du texte.
+  .header-source-badge {
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+    line-height: 1;
+  }
+
+  .header-source-badge--mock {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: $bg-text;
+  }
+
+  .header-source-badge--real {
+    background-color: $text-red;
+    color: $bg-text;
+  }
+
+  // ─────────────────────────────────────────────────────────────────────
+  // Dropdown "Communauté" : pur CSS, déclenché au :hover / :focus-within
+  // du <li> parent. Pas de state JS — le menu est un enfant DOM du <li>,
+  // donc déplacer la souris vers le menu garde le <li> en hover (pas de
+  // gap qui ferait disparaître le menu en chemin).
+  // ─────────────────────────────────────────────────────────────────────
+  .header-item-with-dropdown {
+    position: relative;
+
+    &:hover .header-dropdown,
+    &:focus-within .header-dropdown {
+      display: block;
+    }
+  }
+
+  .header-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 220px;
+    padding: 16px;
+    background-color: $bg-nav;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    box-shadow: $shadow;
+    z-index: 10;
+
+    &-source {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    &-source-value {
+      margin-left: 6px;
+      color: $bg-text;
+      font-weight: 600;
+    }
+
+    &-users {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      // Override la taille 24px des autres items du .header-list
+      li {
+        font-size: 16px;
+      }
+    }
+
+    &-user-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 4px;
+      color: $bg-text;
+      text-decoration: none;
+      transition: background-color 0.15s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      // NavLink ajoute automatiquement .active quand l'URL match
+      &.active {
+        background-color: rgba(255, 255, 255, 0.18);
+        font-weight: 600;
+      }
+    }
+
+    &-user-id {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 400;
+    }
+
+    &-empty {
+      padding: 8px 12px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      font-style: italic;
+    }
+  }
+
+  @media screen and (max-width: 1440px) {
+    .header-list {
+      gap: 100px;
+      font-size: 20px;
+    }
+  }
 }

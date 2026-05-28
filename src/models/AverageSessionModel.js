@@ -1,7 +1,7 @@
 /**
  * AverageSessionModel - couche d'adaptation pour le chart "Durée moyenne des sessions"
  *
- * Donnée brute attendue (réponse de user/:is/average-sessions):
+ * Donnée brute attendue (réponse de user/:id/average-sessions):
  * { userId, sessions: [{ day:1-7, sessionLength: number }, ...] }
  *
  * Rôle:
@@ -18,7 +18,6 @@ export default class AverageSessionModel {
   /**
    * @param {object} raw = { userId, sessions: [...] }
    */
-
   constructor(raw) {
     this.userId = raw.userId;
     this.sessions = this._formatedSessions(raw.sessions);

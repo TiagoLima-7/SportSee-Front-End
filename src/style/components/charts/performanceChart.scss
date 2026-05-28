@@ -6,10 +6,12 @@
  * naturellement carré — change si tu veux matcher pile la maquette).
  */
 
+@use "../../base/variables" as *;
+
 .performance-chart {
   width: 100%;
   aspect-ratio: 258 / 263;
-  background-color: var(--grey-graph-bg);
+  background-color: $grey-graph-bg;
   border-radius: 5px;
   margin: 0;
 

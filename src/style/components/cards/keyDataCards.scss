@@ -21,15 +21,18 @@
  *   - À card_width=160 : 6cqi = 9.6px → clampé à 0.65rem
  */
 
+@use "../../base/variables" as *;
+
 .key-data-card {
   width: 100%;
   aspect-ratio: 258 / 124;
   max-width: 258px;
   display: flex;
   align-items: center;
-  background-color: var(--main-graph-bg);
+  background-color: $main-graph-bg;
   border-radius: 5px;
   margin: 0;
+  transition: all 0.3s;
 
   // ──── Tout le reste en em : suit automatiquement la font-size ────
   padding: 0 2em; // 32px à font-size=16px, 24px à font-size=12px, etc.
@@ -62,7 +65,7 @@
   &-value {
     font-size: 20px; // 20px à font-size=16px
     font-weight: 700;
-    color: var(--text-dark);
+    color: $text-dark;
     margin: 0;
     line-height: 1.2;
   }
@@ -70,7 +73,7 @@
   &-label {
     font-size: 14px; // 14px à font-size=16px
     font-weight: 500;
-    color: var(--text-secondary);
+    color: $text-secondary;
     margin: 0;
     line-height: 1.2;
   }
