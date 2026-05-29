@@ -66,7 +66,7 @@ Deux méthodes :
 Le badge à côté indique la source active. Le choix est persisté en
 `localStorage` (clé `sportSee:apiSource`) — il survit aux reloads.
 
-**Par défaut au démarrage, dans le code.** Ouvrir `src/services/api.js`
+**Par défaut au démarrage, dans le code.** Ouvrir `src/services/mockApi.js`
 et modifier la constante en tête de fichier :
 
 ```js
