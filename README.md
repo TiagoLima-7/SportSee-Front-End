@@ -195,7 +195,7 @@ négatives pour les jours à 0 min. Solution adoptée :
 ## Variables d'environnement
 
 Aucune nécessaire — l'URL du back est hardcodée dans
-`services/api.js` (`http://localhost:3000`). Pour pointer ailleurs,
+`services/mockApi.js` (`http://localhost:3000`). Pour pointer ailleurs,
 éditer la constante `REAL_API_URL` ou la transformer en
 `import.meta.env.VITE_API_URL` selon ton goût.
 
