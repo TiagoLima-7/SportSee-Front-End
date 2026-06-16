@@ -33,8 +33,8 @@ import {
 // =============================================================================
 //   ↓↓↓ CHANGE LE DÉFAUT ICI : commente / décommente l'une des deux lignes ↓↓↓
 // =============================================================================
-//const DEFAULT_API_SOURCE = "real"; // vrai back-end Node sur http://localhost:3000
-const DEFAULT_API_SOURCE = "mock"; // données mockées de src/data/mockData
+const DEFAULT_API_SOURCE = "real"; // vrai back-end Node sur http://localhost:3000
+//const DEFAULT_API_SOURCE = "mock"; // données mockées de src/data/mockData
 // =============================================================================
 
 const REAL_API_URL = "http://localhost:3000";
