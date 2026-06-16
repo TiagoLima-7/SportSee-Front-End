@@ -1,8 +1,12 @@
 /**
  * ScoreMdeol - couche d'adaptation pour le RadialChart "Score"
  *
- * Donnée brute : l'obeject 'user' du hook (déjà normalisé : ona toujours
+ * Donnée brute : l'object 'user' du hook (déjà normalisé : on a toujours
  * 'score' même quand le Back-end renvoie 'todayScore')
+ *
+ * Quirk back-end à absorber ici : pour l'utilisateur 12 le score arrive sous la clé 'todayScore',
+ * pour l'utilisateur 18 sous la clé 'score'. La normalisation vit dans ce model - l'endroit où la
+ * donnée est interpretée - plutôt que dans useUserData, qui doit rester in transport pur.
  *
  * Très petit modèle, mais on garde la même structure que les autres pour cohérence:
  * si demain on doit ajouter de la logique ( changer la couleur en function du score,
@@ -15,7 +19,12 @@ export default class ScoreModel {
    */
 
   constructor(user) {
-    this.score = Math.max(0, Math.min(1, user.score ?? 0));
+    //Normalisation back entre 'todayScore' et 'score'
+    //Fallback sur 0 si aucun des deux champs n'est présent
+    const raw = user?.todayScore ?? user?.score ?? 0;
+
+    //Clamp [0, 1] pour se prémunir d'une valeur inattendue (negatif, > 1)
+    this.score = Math.max(0, Math.min(1, raw));
   }
 
   /**
